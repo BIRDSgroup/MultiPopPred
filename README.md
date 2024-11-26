@@ -1,6 +1,6 @@
 # MultiPopPred
 
-This is the official repository of the manuscript "MultiPopPred: Improved Disease Risk Prediction in the South Asian Population" by Ritwiz Kamal and Manikandan Narayanan.
+This is the official repository of the manuscript "MultiPopPred: A Trans-Ethnic Disease Risk Prediction Method, and its Application to the South Asian Population" by Ritwiz Kamal and Manikandan Narayanan.
 
 
 ## License Preamble
