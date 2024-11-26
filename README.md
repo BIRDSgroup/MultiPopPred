@@ -13,7 +13,7 @@ MultiPopPred is distributed in the hope that it will be useful, but WITHOUT ANY 
 ## Section 1: MultiPopPred - three variants
 The code for three variants of MultiPopPred, as illustrated in the figure below, are provided.
 
-![Methodology Overview]([Application%20on%20helminth-diabetes%20data/Fig1.png](https://drive.google.com/file/d/1hKbBhx2kybdlKrXX3ErdRjyFk23q1Nls/view?usp=sharing))
+![Methodology Overview](https://github.com/BIRDSgroup/MultiPopPred/blob/main/Tutorial/MethodologyOverview.png)
 
 
 ## Section 2: MultiPopPred - Getting Started
