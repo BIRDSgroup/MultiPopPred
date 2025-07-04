@@ -18,5 +18,5 @@ The code for five versions of MultiPopPred, as illustrated in the figure below, 
 
 ## Section 2: MultiPopPred - Getting Started
 
-The basic code for the five versions of MultiPopPred are provided as Jupyter notebooks. Additional details and examples will be provided in due course. 
+The basic code for the five versions of MultiPopPred are provided as Jupyter notebooks.
 
