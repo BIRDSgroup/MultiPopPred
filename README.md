@@ -14,6 +14,8 @@ MultiPopPred is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 The basic code for the five versions of MultiPopPred are provided as Jupyter notebooks in [Scripts](./Scripts). Example data for running the scripts is made available here: [Link to example data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EtX4VV-0h1dJrXaW2kA4gWoBQxZX04sE25UcJ6V5jXccNA?e=LCRCHO).
 
+Basic Python packages required to use MultiPopPred are available in [requirements.txt](./requirements.txt). Optional: The complete conda environment can be reproduced using [environment.yml](./environment.yml).
+
 Additional information such as Supplementary Data files associated with the manuscript are provided in [Supplementary Data](https://bit.ly/4nemWud) . 
 
 ## Section 2: MultiPopPred - five versions
