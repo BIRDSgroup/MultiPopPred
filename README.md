@@ -13,7 +13,7 @@ MultiPopPred is distributed in the hope that it will be useful, but WITHOUT ANY 
 ## Section 1: MultiPopPred - five versions
 The code for five versions of MultiPopPred, as illustrated in the figure below, are provided.
 
-![Methodology Overview](https://github.com/BIRDSgroup/MultiPopPred/blob/main/Figures/Plots/Final_Method.png)
+![Methodology Overview](https://github.com/BIRDSgroup/MultiPopPred/blob/main/Figures/Plots/method_github.png)
 
 
 ## Section 2: MultiPopPred - Getting Started
