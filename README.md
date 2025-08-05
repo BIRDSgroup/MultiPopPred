@@ -2,6 +2,15 @@
 
 This is the official repository of the manuscript "MultiPopPred: A Trans-Ethnic Disease Risk Prediction Method, and its Application to the South Asian Population" by Ritwiz Kamal and Manikandan Narayanan.
 
+- [License Preamble](#license-preamble)
+- [Getting Started](#section-1-multipoppred---getting-started)
+- [Using MultiPopPred](#section-2-using-multipoppred)
+  - [Running Jupyter Notebooks](#running-jupyter-notebooks)
+  - [Input Requirements](#input-requirements)
+  - [Expected Outputs](#multipoppred-output)
+  - [Example Data](#running-multipoppred-with-example-data)
+- [Data Availability and Reproducability](#section-4-data-availability-and-reproducability)
+- [MultiPopPred - Five Versions](#section-5-multipoppred---five-versions)
 
 ## License Preamble
 Copyright 2024 BIRDS Group, IIT Madras
@@ -10,13 +19,27 @@ MultiPopPred is a free software: you can redistribute it and modify it under the
 
 MultiPopPred is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Please take a look at the GNU Lesser General Public License for more details.
 
+You should have received a copy of the GNU Lesser General Public License along with MultiPopPred. If not, see [https://www.gnu.org/licenses/](https://www.gnu.org/licenses/).
+
 ## Section 1: MultiPopPred - Getting Started
 
-The basic code for the five versions of MultiPopPred are provided as Jupyter notebooks in [Scripts](./Scripts). Example data for running the scripts is made available here: [Link to example data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EtX4VV-0h1dJrXaW2kA4gWoBQxZX04sE25UcJ6V5jXccNA?e=LCRCHO).
-
-Basic Python packages required to use MultiPopPred are available in [requirements.txt](./requirements.txt). Optional: The complete conda environment can be reproduced using [environment.yml](./environment.yml).
-
-Additional information such as Supplementary Data files associated with the manuscript are provided in [Supplementary Data](https://bit.ly/4nemWud) .
+- The MultiPopPred Github repository can be downloaded using
+   ```
+   git clone https://github.com/BIRDSgroup/MultiPopPred.git
+   ```
+- The basic code for the five versions of MultiPopPred are provided as Jupyter notebooks in [Scripts](./Scripts).
+- Example data for running the scripts is made available here: [Link to example data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EtX4VV-0h1dJrXaW2kA4gWoBQxZX04sE25UcJ6V5jXccNA?e=LCRCHO).
+- Hardware Requirements
+  - MultiPopPred requires only a standard computer with enough RAM to support the in-memory operations.
+- Software Requirements
+   - OS Requirements
+     - MultiPopPred is supported for MacOS and Linux. We have tested MultiPopPred on the following systems:
+       - Linux: Ubuntu 18.04, 24.04 and CentOS 7.9.2009
+       - MacOS: Ventura 13.5
+   - Python Dependencies
+     - Basic Python packages required to use MultiPopPred are available in [requirements.txt](./requirements.txt). Installation of each package takes about ~2-5 minutes each.
+     - Optional: The complete conda environment can be reproduced using [environment.yml](./environment.yml). 
+- Additional information such as Supplementary Data files associated with the manuscript are provided in [Supplementary Data](https://bit.ly/4nemWud) .
 
 ## Section 2: Using MultiPopPred
 
@@ -25,7 +48,7 @@ Additional information such as Supplementary Data files associated with the manu
 A command line version of MultiPopPred (executable as shown below) will be made available through this Github soon. Please watch this space for more updates.
 
 ```
-python MPP-PRS+.py --version MPP-PRS+ --aux_pops EUR,EAS,AMR,AFR --tar_pop SAS --aux_ss eur_ss.txt,eas_ss.txt,amr.txt,afr.txt --tar_ss sas_ss.txt --tar_geno training_geno --tar_pheno training_pheno --penalty 10 --out SAS_MPP_out.txt
+python MultiPopPred-master.py --version MPP-PRS+ --aux_pops EUR,EAS,AMR,AFR --tar_pop SAS --aux_ss eur_ss.txt,eas_ss.txt,amr.txt,afr.txt --tar_ss sas_ss.txt --tar_geno training_geno --tar_pheno training_pheno --penalty 10 --out SAS_MPP_out.txt
 ```
 
 ### Running Jupyter Notebooks
@@ -288,7 +311,9 @@ To run MultiPopPred on the provided [example data](https://1drv.ms/f/c/1d2cade3b
 4. Modify the PATH variables within the script(s) as per your system.
 5. Run the jupyter notebook script(s).
 
-## Section 4: MultiPopPred - five versions
+## Section 4: Data Availability and Reproducability
+
+## Section 5: MultiPopPred - five versions
 The code for five versions of MultiPopPred, as illustrated in the figure below, are provided.
 
 ![Methodology Overview](https://github.com/BIRDSgroup/MultiPopPred/blob/main/Figures/Plots/method_github.png)
