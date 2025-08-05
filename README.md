@@ -25,7 +25,7 @@ Additional information such as Supplementary Data files associated with the manu
 A command line version of MultiPopPred (executable as shown below) will be made available through this Github soon. Please watch this space for more updates.
 
 ```
-python MPP-PRS+.py --version MPP-PRS+ --aux_pops EUR,EAS,AMR,AFR --tar_pop SAS --aux_ss eur_ss.txt,eas_ss.txt,amr.txt,afr.txt --tar_ss sas_ss.txt --tar_geno training_geno --tar_pheno training_pheno --out SAS_MPP_out.txt
+python MPP-PRS+.py --version MPP-PRS+ --aux_pops EUR,EAS,AMR,AFR --tar_pop SAS --aux_ss eur_ss.txt,eas_ss.txt,amr.txt,afr.txt --tar_ss sas_ss.txt --tar_geno training_geno --tar_pheno training_pheno --penalty 10 --out SAS_MPP_out.txt
 ```
 
 ### Running Jupyter Notebooks
@@ -87,6 +87,7 @@ MPP-PRS+ requires the following inputs:
    0.0783526847346506
    1.08188259542337
    ```
+4. A L1 penalty value.
 
 #### Lassosum-TrueLD
 
@@ -103,6 +104,8 @@ Lassosum-TrueLD works on a single population/anestry at a time and requires the 
    1.3. The .fam file contains information on samples/individuals in the same format as depicted in point 2.3 under MPP-PRS+ input requirements.
    
 2. The population in consideration's Phenotype files for training, validation and testing datasets in the same format as depicted in point 3 under MPP-PRS+ input requirements.
+   
+3. A L1 penalty value.
 
 #### MPP-PRS
 
@@ -126,6 +129,8 @@ MPP-PRS requires the following inputs:
    2.3. The .fam file contains information on samples/individuals in the same format as depicted in point 2.3 under MPP-PRS+ input requirements.
    
 3. Target Population's Phenotype files for training, validation and testing datasets in the same format as depicted in point 3 under MPP-PRS+ input requirements.
+   
+4. A L1 penalty value.
 
 #### Lassosum-ExtLD
 
@@ -193,6 +198,7 @@ MPP-GWAS requires the following inputs:
    0.0783526847346506
    1.08188259542337
    ```
+4. A L1 penalty value.
 
 #### MPP-GWAS-TarSS
 
@@ -208,6 +214,8 @@ MPP-GWAS-TarSS requires the following inputs:
    22    rs4819535    0.154243623837     17278762    C    T    0.0316657163724304     0.0308069292177538    1.02787642833878     0.304007958825193 1000
    ```
 2. Target Population's external LD reference panel in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format. The reference panel can be obtained from an appropriate source such as [1000 Genomes](https://cncr.nl/research/magma/). The computation of LD happens during runtime of the code.
+   
+3. L1 and L2 penalty values.
 
 #### MPP-GWAS-Admixture
 
@@ -254,6 +262,7 @@ MPP-GWAS-Admixture requires the following inputs:
    0.512244    0.000010    0.000010    0.487736
    0.616460    0.021437    0.248714    0.113389
    ```
+5. A L1 penalty value.
 
 ### MultiPopPred Output
 
@@ -264,7 +273,22 @@ CHR	SNP	        POS	        A1	BETA
 22	rs1807512	17221495.0	C	0.0011822995349338257   
 ```
 
-## Section 3: MultiPopPred - five versions
+The PRS can then be computed with the improved target betas using either the evaluation function provided in the jupyter notebooks or using PLINK's score flag.
+
+### Running MultiPopPred with example data
+
+To run MultiPopPred on the provided [example data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EtX4VV-0h1dJrXaW2kA4gWoBQxZX04sE25UcJ6V5jXccNA?e=LCRCHO), the following steps need to be followed:
+
+1. Download example_data.tar.gz (~50 MB) from the link given above and decompress it using
+   ```
+   tar -xvzf example_data.tar.gz
+   ```
+2. Download MultiPopPred scripts from [Scripts](./Scripts).
+3. Place the MultiPopPred script(s) within your example_data directory.
+4. Modify the PATH variables within the script(s) as per your system.
+5. Run the jupyter notebook script(s).
+
+## Section 4: MultiPopPred - five versions
 The code for five versions of MultiPopPred, as illustrated in the figure below, are provided.
 
 ![Methodology Overview](https://github.com/BIRDSgroup/MultiPopPred/blob/main/Figures/Plots/method_github.png)
