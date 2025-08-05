@@ -37,8 +37,11 @@ You should have received a copy of the GNU Lesser General Public License along w
        - Linux: Ubuntu 18.04, 24.04 and CentOS 7.9.2009
        - MacOS: Ventura 13.5
    - Python Dependencies
-     - Basic Python packages required to use MultiPopPred are available in [requirements.txt](./requirements.txt). Installation of each package takes about ~2-5 minutes each.
-     - Optional: The complete conda environment can be reproduced using [environment.yml](./environment.yml). 
+     - Basic Python packages required to use MultiPopPred are available in [requirements.txt](./requirements.txt). Typical install time for each package on a "normal" desktop computer is ~2-5 minutes.
+     - Optional: The complete conda environment can be reproduced using [environment.yml](./environment.yml).
+       ```
+       conda env create -f environment.yml
+       ``` 
 - Additional information such as Supplementary Data files associated with the manuscript are provided in [Supplementary Data](https://bit.ly/4nemWud) .
 
 ## Section 2: Using MultiPopPred
@@ -310,6 +313,8 @@ To run MultiPopPred on the provided [example data](https://1drv.ms/f/c/1d2cade3b
 3. Place the MultiPopPred script(s) within your example_data directory.
 4. Modify the PATH variables within the script(s) as per your system.
 5. Run the jupyter notebook script(s).
+
+Typical expected runtime on a "normal" desktop computer is ~1-3 seconds for each of the five versions of MultiPopPred applied to the provided example data, for a given single hyperparameter configuration.
 
 ## Section 4: Data Availability and Reproducability
 
