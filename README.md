@@ -9,8 +9,10 @@ This is the official repository of the manuscript "MultiPopPred: A Trans-Ethnic 
   - [Input Requirements](#input-requirements)
   - [Expected Outputs](#multipoppred-output)
   - [Example Data](#running-multipoppred-with-example-data)
-- [Data Availability and Reproducability](#section-4-data-availability-and-reproducability)
+- [Data Availability and Reproducibility](#section-4-data-availability-and-reproducibility)
 - [MultiPopPred - Five Versions](#section-5-multipoppred---five-versions)
+- [Support](#section-6-support)
+- [Citation](#section-7-citation)
 
 ## License Preamble
 Copyright 2024 BIRDS Group, IIT Madras
@@ -316,12 +318,52 @@ To run MultiPopPred on the provided [example data](https://1drv.ms/f/c/1d2cade3b
 
 Typical expected runtime on a "normal" desktop computer is ~1-3 seconds for each of the five versions of MultiPopPred applied to the provided example data, for a given single hyperparameter configuration.
 
-## Section 4: Data Availability and Reproducability
+## Section 4: Data Availability and Reproducibility
+
+### Data Availability
+
+Genotype-Phenotype data generated in this work is available through the following links:
+
+- Complete simulated genotype data for EUR, EAS, AMR, AFR, SAS populations are available as follows:
+  - EUR: Coming Soon
+  - EAS: Coming Soon
+  - AMR: Coming Soon
+  - AFR: Coming Soon
+  - SAS: Coming Soon
+
+- Complete simulated genotype-phenotype data for each of our simulation analyses are available as follows:
+  - Simulation Analyses 1 (Varying heritability of simulated trait): Coming Soon
+  - Simulation Analyses 2 (Varying number of samples in auxiliary populations): Coming Soon
+  - Simulation Analyses 3 (Varying number of sample in target population): Coming Soon
+
+### Reproducibility - Level 1: Reproducing Figures from Final Results
+
+Data and code for reproducing the main text figures from final results are available in [Figures](./Figures)
+
+### Reproducibility - Level 2: Reproducing Final Results from Raw Outputs
+
+Coming Soon
+
+### Reproducibility - Level 3: Reproducing Raw Outputs from Input Genotype-Phenotype Data
+
+Coming Soon
+
+### Reproducibility - Level 4: Reproducing Input Genotype-Phenotype Data
+
+Coming Soon
 
 ## Section 5: MultiPopPred - five versions
 The code for five versions of MultiPopPred, as illustrated in the figure below, are provided.
 
 ![Methodology Overview](https://github.com/BIRDSgroup/MultiPopPred/blob/main/Figures/Plots/method_github.png)
+
+## Section 6: Support
+
+For any queries regarding MultiPopPred, please contact Ritwiz Kamal (ritwiz@cse.iitm.ac.in) and/or Manikandan Narayanan (nmanik@cse.iitm.ac.in)
+
+## Section 7: Citation
+
+Kamal, R. and Narayanan, M., 2024. MultiPopPred: A Trans-Ethnic Disease Risk Prediction Method, and its Application to the South Asian Population. bioRxiv, pp.2024-11. [https://doi.org/10.1101/2024.11.26.625410](https://doi.org/10.1101/2024.11.26.625410)
 
 
 
