@@ -285,7 +285,7 @@ Here ```BETA``` represents the improved effect size estimates of SNPs present in
 
 To run MultiPopPred on the provided [example data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EtX4VV-0h1dJrXaW2kA4gWoBQxZX04sE25UcJ6V5jXccNA?e=LCRCHO), the following steps need to be followed:
 
-1. Download example_data.tar.gz (~50 MB) from the link given above and decompress it using
+1. Download example_data.tar.gz (~50 Mb) from the link given above and decompress it using
    ```
    tar -xvzf example_data.tar.gz
    ```
@@ -303,11 +303,11 @@ Typical expected runtime on a "normal" desktop computer is ~1-3 seconds for each
 Simulated Genotype-Phenotype data generated in this work is available through the following links:
 
 - Complete simulated genotype data for EUR, EAS, AMR, AFR, SAS populations are available as follows:
-  - EUR: Coming Soon
-  - EAS: Coming Soon
-  - AMR: Coming Soon
-  - AFR: Coming Soon
-  - SAS: Coming Soon
+  - EUR: [EUR_Genotypes.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/EVAa1COvh3xOpMR3UyhzI6wBUeughLFGhB3bY0kevXxsHw?e=LQbKNb) (~1.29 Gb)
+  - EAS: [EAS_Genotypes.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/EaYLcnGM1b9EvuZaz5vcu8IBeG2-AXzHPwjwe5-uBp51vg?e=qcDo0T) (~1.21 Gb)
+  - AMR: [AMR_Genotypes.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/EYk-OlxuZllEm322-iYK33YBHk2verUXRtr1i3ctRgu14w?e=3QDWOY) (~1.31 Gb)
+  - AFR: [AFR_Genotypes.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/EV87FzGZi_xFjntyxVNekYcBRTOy45NkxlbyuivyM_etqg?e=frYcfR) (~600 Mb)
+  - SAS: [SAS_Genotypes_PartI.tar.gz]() (~6.11 Gb), [SAS_Genotypes_PartII.tar.gz]() (~8.30 Gb) 
 
 - Complete simulated genotype-phenotype data for each of our simulation analyses are available as follows:
   - Simulation Analyses 1 (Varying heritability of simulated trait): Coming Soon
