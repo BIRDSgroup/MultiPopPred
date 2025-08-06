@@ -307,7 +307,7 @@ Simulated Genotype-Phenotype data generated in this work is available through th
   - EAS: [EAS_Genotypes.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/EaYLcnGM1b9EvuZaz5vcu8IBeG2-AXzHPwjwe5-uBp51vg?e=qcDo0T) (~1.21 Gb)
   - AMR: [AMR_Genotypes.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/EYk-OlxuZllEm322-iYK33YBHk2verUXRtr1i3ctRgu14w?e=3QDWOY) (~1.31 Gb)
   - AFR: [AFR_Genotypes.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/EV87FzGZi_xFjntyxVNekYcBRTOy45NkxlbyuivyM_etqg?e=frYcfR) (~600 Mb)
-  - SAS: [SAS_Genotypes_PartI.tar.gz]() (~6.11 Gb), [SAS_Genotypes_PartII.tar.gz]() (~8.30 Gb) 
+  - SAS: [SAS_Genotypes_PartI.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/ERMvCYqp5OhHtvbip629-qsBMNmOKE9EWsxdx6FuNIIhnw?e=zkcIbK) (~6.11 Gb), [SAS_Genotypes_PartII.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/EbHV-K0rpyFEr690i0kUHFMB3IWJXJoV-8fUX30oRXq-cQ?e=144Rxm) (~8.30 Gb) 
 
 - Complete simulated genotype-phenotype data for each of our simulation analyses are available as follows:
   - Simulation Analyses 1 (Varying heritability of simulated trait): Coming Soon
