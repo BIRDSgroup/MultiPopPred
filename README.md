@@ -50,7 +50,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 
 ### Coming Soon
 
-A command line version of MultiPopPred (executable as shown below) will be made available through this Github soon. Please watch this space for more updates.
+While the basic code for the five versions of MultiPopPred are already provided as Jupyter notebooks in [Scripts](./Scripts), a command line version of MultiPopPred (executable as shown below) will be made available through this Github soon. Please watch this space for more updates.
 
 ```
 python MultiPopPred-master.py --version MPP-PRS+ --aux_pops EUR,EAS,AMR,AFR --tar_pop SAS --aux_ss eur_ss.txt,eas_ss.txt,amr.txt,afr.txt --tar_ss sas_ss.txt --tar_geno training_geno --tar_pheno training_pheno --penalty 10 --out SAS_MPP_out.txt
@@ -66,7 +66,7 @@ jupyter-notebook
 ```
 (b) For initializing Jupyter Notebook on remote server
 
-Step 1: From ternimal 1 enter the command
+Step 1: From terminal 1 enter the command
 ```
 jupyter-notebook --no-browser
 ```
@@ -79,6 +79,8 @@ ssh -L 8080:localhost:xxxx username@hostname
 Step 3: From your browser, go to [http://localhost:8080/](http://localhost:8080/) and enter the token (Obtained after Step 1) for logging into jupyter notebook.
 
 ### Input Requirements
+
+This section describes the input requirements for the five versions of MultiPopPred - MPP-PRS+, MPP-PRS, MPP-GWAS, MPP-GWAS-TarSS, MPP-GWAS-Admixture.
 
 #### MPP-PRS+
 
@@ -234,13 +236,8 @@ The code for MPP-GWAS-TarSS can be found at [MPP-GWAS-TarSS.ipynb](./Scripts/MPP
 
 MPP-GWAS-TarSS requires the following inputs:
 
-1. GWAS Summary Statistics for each auxiliary population as well as the target population in the following format:
-   ```
-   CHR   SNP          GENETIC.DIST       POS         A1   A2   BETA                   SE                    T                    P                 N
-   22    rs5747999    0.0127800389155    17075353    A    C    -0.0046297381055207    0.0308228833408787    -0.15020457542272    0.880603216185275 1000
-   22    rs1807512    0.153130271278     17221495    C    T    -0.0015843367342689    0.0308231909399726    -0.0514008019920572  0.959006145722472 1000
-   22    rs4819535    0.154243623837     17278762    C    T    0.0316657163724304     0.0308069292177538    1.02787642833878     0.304007958825193 1000
-   ```
+1. GWAS Summary Statistics for each auxiliary population as well as the target population in the same format as depicted in point 1 under MPP-GWAS input requirements.
+  
 2. Target Population's external LD reference panel in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format. The reference panel can be obtained from an appropriate source such as [1000 Genomes](https://cncr.nl/research/magma/). The computation of LD happens during runtime of the code.
    
 3. L1 and L2 penalty values.
@@ -251,36 +248,18 @@ The code for MPP-GWAS-Admixture can be found at [MPP-GWAS-Admixture.ipynb](./Scr
 
 MPP-GWAS-Admixture requires the following inputs:
 
-1. GWAS Summary Statistics for each auxiliary population (and optionally the target population) in the following format:
-   ```
-   CHR   SNP          GENETIC.DIST       POS         A1   A2   BETA                   SE                    T                    P                 N
-   22    rs5747999    0.0127800389155    17075353    A    C    -0.0046297381055207    0.0308228833408787    -0.15020457542272    0.880603216185275 1000
-   22    rs1807512    0.153130271278     17221495    C    T    -0.0015843367342689    0.0308231909399726    -0.0514008019920572  0.959006145722472 1000
-   22    rs4819535    0.154243623837     17278762    C    T    0.0316657163724304     0.0308069292177538    1.02787642833878     0.304007958825193 1000
-   ```
+1. GWAS Summary Statistics for each auxiliary population (and optionally the target population) in the same format as depicted in point 1 under MPP-GWAS input requirements.
+   
 2. Target Population's Genotype files for training, validation and testing datasets in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format.
    
    2.1. The .bed file contains the binary encoded genotypes
 
-   2.2. The .bim file contains information on SNPs in the following format
-   ```
-   22 rs5747999 0 17075353 A C
-   22 rs1807512 0 17221495 C T
-   ```
+   2.2. The .bim file contains information on SNPs in the same format as depicted in point 2.2 under MPP-GWAS input requirements.
 
-   2.3. The .fam file contains information on samples/individuals in the following format
-   ```
-   1001 1001 0 0 0 -9
-   1002 1002 0 0 0 -9
-   ```
+   2.3. The .fam file contains information on samples/individuals in the same format as depicted in point 2.3 under MPP-GWAS input requirements.
    
-3. Target Population's Phenotype files for training, validation and testing datasets in the following format
-   ```
-   -0.570771708057521
-   -0.503465336753098
-   0.0783526847346506
-   1.08188259542337
-   ```
+3. Target Population's Phenotype files for training, validation and testing datasets in the same format as depicted in point 3 under MPP-GWAS input requirements.
+   
 4. The admixture proportions for individuals in the target population in the following format:
    (The admixture proportions can be obtained with the help of the tool [Admixture](https://dalexander.github.io/admixture/))
    ```
@@ -300,8 +279,7 @@ CHR	SNP	        POS	        A1	BETA
 22	rs5747999	17075353.0	A	0.008025369947048135
 22	rs1807512	17221495.0	C	0.0011822995349338257   
 ```
-
-The PRS can then be computed with the improved target betas using either the evaluation function provided in the jupyter notebooks or using PLINK's score flag.
+Here ```BETA``` represents the improved effect size estimates of SNPs present in the ```SNP``` column, for the target population as obtained by MultiPopPred. The PRS can then be computed with these improved target betas using either the ```evaluate``` function provided in the jupyter notebooks or using PLINK's ```--score``` flag.
 
 ### Running MultiPopPred with example data
 
@@ -322,7 +300,7 @@ Typical expected runtime on a "normal" desktop computer is ~1-3 seconds for each
 
 ### Data Availability
 
-Genotype-Phenotype data generated in this work is available through the following links:
+Simulated Genotype-Phenotype data generated in this work is available through the following links:
 
 - Complete simulated genotype data for EUR, EAS, AMR, AFR, SAS populations are available as follows:
   - EUR: Coming Soon
@@ -338,7 +316,17 @@ Genotype-Phenotype data generated in this work is available through the followin
 
 ### Reproducibility - Level 1: Reproducing Figures from Final Results
 
-Data and code for reproducing the main text figures from final results are available in [Figures](./Figures)
+- Data for reproducing the main text figures from final results are available in [Figures/Data](./Figures/Data).
+- Code for reproducing the main text figures from final results are available in [Figures](./Figures).
+- The code-data mapping for each figure is as follows:
+  - Figures 2 and 3 -> Data: [SimulExp1.csv](./Figures/Data/SimulExp1.csv), [SimulExp2.csv](./Figures/Data/SimulExp2.csv), [SimulExp3.csv](./Figures/Data/SimulExp3.csv) -> Code: [Figures_2_and_3.ipynb](./Figures/Figures_2_and_3.ipynb)
+  - Figure 4 -> Data: [SemiSimulExp.csv](./Figures/Data/SemiSimulExp.csv) -> Code: [Figure_4.ipynb](./Figures/Figure_4.ipynb)
+  - Figure 5 -> Data: [CT_analysis.csv](./Figures/Data/CT_analysis.csv), [CT_analysis_std.csv](./Figures/Data/CT_analysis_std.csv) -> Code: [Figure_5.ipynb](./Figures/Figure_5.ipynb)
+  - Figures 6 and 7 -> Data: [MPP_Suppl_UKBB.csv](./Figures/Data/MPP_Suppl_UKBB.csv) -> Code: [Figures_6_and_7.ipynb](./Figures/Figures_6_and_7.ipynb)
+- To reproduce each figure
+  - The corresponding data and code scripts should be placed in the same directory.
+  - The PATH variables to load data should be modified appropriately in the code script.
+  - The code script should be run from start to finish with no further intervention.
 
 ### Reproducibility - Level 2: Reproducing Final Results from Raw Outputs
 
@@ -353,7 +341,7 @@ Coming Soon
 Coming Soon
 
 ## Section 5: MultiPopPred - five versions
-The code for five versions of MultiPopPred, as illustrated in the figure below, are provided.
+The code for five versions of MultiPopPred, as illustrated in the figure below, are provided in [Scripts](./Scripts).
 
 ![Methodology Overview](https://github.com/BIRDSgroup/MultiPopPred/blob/main/Figures/Plots/method_github.png)
 
@@ -363,7 +351,7 @@ For any queries regarding MultiPopPred, please contact Ritwiz Kamal (ritwiz@cse.
 
 ## Section 7: Citation
 
-Kamal, R. and Narayanan, M., 2024. MultiPopPred: A Trans-Ethnic Disease Risk Prediction Method, and its Application to the South Asian Population. bioRxiv, pp.2024-11. [https://doi.org/10.1101/2024.11.26.625410](https://doi.org/10.1101/2024.11.26.625410)
+Kamal, R. and Narayanan, M., 2025. MultiPopPred: A Trans-Ethnic Disease Risk Prediction Method, and its Application to the South Asian Population. bioRxiv, pp.2024-11. [https://doi.org/10.1101/2024.11.26.625410](https://doi.org/10.1101/2024.11.26.625410)
 
 
 
