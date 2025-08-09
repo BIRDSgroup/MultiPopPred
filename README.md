@@ -310,9 +310,9 @@ Simulated Genotype-Phenotype data generated in this work is available through th
   - SAS: [SAS_Genotypes_PartI.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/ERMvCYqp5OhHtvbip629-qsBMNmOKE9EWsxdx6FuNIIhnw?e=zkcIbK) (~6.11 Gb), [SAS_Genotypes_PartII.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/EbHV-K0rpyFEr690i0kUHFMB3IWJXJoV-8fUX30oRXq-cQ?e=144Rxm) (~8.30 Gb) 
 
 - Complete simulated genotype-phenotype data for each of our simulation analyses are available as follows:
-  - Simulation Analyses 1 (Varying heritability of simulated trait): Coming Soon
-  - Simulation Analyses 2 (Varying number of samples in auxiliary populations): Coming Soon
-  - Simulation Analyses 3 (Varying number of sample in target population): Coming Soon
+  - Simulation Analyses 1 (Varying heritability of simulated trait): [Simulation_Analyses_1](https://1drv.ms/f/c/1d2cade3bfb64a9a/EgrjGhUBFMxItVfu53Nb4o4Bi2LMfmPbzTXzPWfNbx7mIA?e=3KMfXp)
+  - Simulation Analyses 2 (Varying number of samples in auxiliary populations): [Simulation_Analyses_2](https://1drv.ms/f/c/1d2cade3bfb64a9a/El18a1CHg21InTva6DtnnxsBVC8bIgkW2Gfub8y8T0uquA?e=sBEs3u)
+  - Simulation Analyses 3 (Varying number of sample in target population): [Simulation_Analyses_3](https://1drv.ms/f/c/1d2cade3bfb64a9a/Ep8cRApKdepOtlcWMXKTTdwBRAYDtkpOeGpuvCJJgV9TiA?e=2gkl5q)
 
 ### Reproducibility - Level 1: Reproducing Figures from Final Results
 
@@ -354,7 +354,7 @@ For any queries regarding MultiPopPred, please contact Ritwiz Kamal (ritwiz@cse.
 Kamal, R. and Narayanan, M., 2025. MultiPopPred: A Trans-Ethnic Disease Risk Prediction Method, and its Application to the South Asian Population. bioRxiv, pp.2024-11. [https://doi.org/10.1101/2024.11.26.625410](https://doi.org/10.1101/2024.11.26.625410)
 
 
-
+[⬆️ Back to top](#multipoppred)
 
 
 
