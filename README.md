@@ -32,7 +32,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 - The basic code for the five versions of MultiPopPred are provided as Jupyter notebooks in [Scripts](./Scripts).
 - Example data for running the scripts is made available here: [Link to example data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EtX4VV-0h1dJrXaW2kA4gWoBQxZX04sE25UcJ6V5jXccNA?e=LCRCHO).
 - Hardware Requirements
-  - MultiPopPred requires only a standard computer with enough RAM to support the in-memory operations.
+  - MultiPopPred requires only a standard computer with enough RAM and CPU-cores to support the in-memory operations. 
 - Software Requirements
    - OS Requirements
      - MultiPopPred is supported for MacOS and Linux. We have tested MultiPopPred on the following systems:
@@ -330,15 +330,29 @@ Simulated Genotype-Phenotype data generated in this work is available through th
 
 ### Reproducibility - Level 2: Reproducing Final Results from Raw Outputs
 
-Coming Soon
+- Data for reproducing the final results from raw outputs are available in ./.../Results_MultiPopPred/ and ./.../Results_SOTAmethods/ at [Simulated_Genotype_Phenotype_Data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EkQ4N5Pt3YJMkkN1Jy2N6KkBi0qePp6arGFB9IxHGSFZEQ?e=1CxJis).
+- Code for reproducing the final results from raw outputs is available at [Reproducbility_Level2.ipynb](./Reproducibility/Reproducibility_Level2.ipynb).
+   - The code depicts reproducbility for a few sample datasets corresponding to some simulation configurations.
+   - Instructions to extend the same to other/all simulation configurations is included within the code.
 
 ### Reproducibility - Level 3: Reproducing Raw Outputs from Input Genotype-Phenotype Data
 
-Coming Soon
+- Data for reproducing the raw outputs from input genotype-phenotype data are available at [Simulated_Genotype_Phenotype_Data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EkQ4N5Pt3YJMkkN1Jy2N6KkBi0qePp6arGFB9IxHGSFZEQ?e=1CxJis).
+- Codes for reproducing the raw outputs from input genotype-phenotype data are available at [Reproducibility](./Reproducibility) as follows:
+  - MPP-PRS+: [Reproducibility_Level3_MPP-PRS+.ipynb](./Reproducibility/Reproducibility_Level3_MPP-PRS+.ipynb)
+  - MPP-PRS: [Reproducibility_Level3_MPP-PRS.ipynb](./Reproducibility/Reproducibility_Level3_MPP-PRS.ipynb)
+  - MPP-GWAS: [Reproducibility_Level3_MPP-GWAS.ipynb](./Reproducibility/Reproducibility_Level3_MPP-GWAS.ipynb)
+  - MPP-GWAS-TarSS: [Reproducibility_Level3_MPP-GWAS-TarSS.ipynb](./Reproducibility/Reproducibility_Level3_MPP-GWAS-TarSS.ipynb)
+  - MPP-GWAS-Admix: [Reproducibility_Level3_MPP-GWAS-Admix.ipynb](./Reproducibility/Reproducibility_Level3_MPP-GWAS-Admix.ipynb)
+- The code depicts reproducbility for a few sample datasets corresponding to some simulation configurations.
+- Instructions to extend the same to other/all simulation configurations is included within the code.
 
 ### Reproducibility - Level 4: Reproducing Input Genotype-Phenotype Data
 
-Coming Soon
+- Data for reproducing input genotype-phenotype data is available at [Reproducibility_Level4.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/Ec7uZf7weg9FrDK4s9uG0PIBZ_5QjEP5SncE5Fc-zEVkgg?e=dPzMY9)
+- Script for reproducing input genotype-phenotype data is available at [simulate_phenotypes.R](./Reproducibility/simulate_phenotypes.R)
+- The code depicts reproducbility for a few sample datasets corresponding to some simulation configurations.
+- Instructions to extend the same to other/all simulation configurations is included within the code.
 
 ## Section 5: MultiPopPred - five versions
 The code for five versions of MultiPopPred, as illustrated in the figure below, are provided in [Scripts](./Scripts).
