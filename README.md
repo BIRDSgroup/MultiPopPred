@@ -5,6 +5,7 @@ This is the official repository of the manuscript "MultiPopPred: A Trans-Ethnic 
 - [License Preamble](#license-preamble)
 - [Getting Started](#section-1-multipoppred---getting-started)
 - [Using MultiPopPred](#section-2-using-multipoppred)
+  - [Running via Command Line](#running-via-command-line)  
   - [Running Jupyter Notebooks](#running-jupyter-notebooks)
   - [Input Requirements](#input-requirements)
   - [Expected Outputs](#multipoppred-output)
@@ -48,13 +49,133 @@ You should have received a copy of the GNU Lesser General Public License along w
 
 ## Section 2: Using MultiPopPred
 
-### Coming Soon
+### Running via Command Line
 
-While the basic code for the five versions of MultiPopPred are already provided as Jupyter notebooks in [Scripts](./Scripts), a command line version of MultiPopPred (executable as shown below) will be made available through this Github soon. Please watch this space for more updates.
+A unified MultiPopPred master python (.py) file including all versions of the method is now available for use. Below we demonstrate a sample usage of for our default version (MPP-PRS+) along with details on all optional and mandatory arguments. Other versions can be used in a similar manner depending on their specific input requirements. 
 
 ```
-python MultiPopPred-master.py --version MPP-PRS+ --aux_pops EUR,EAS,AMR,AFR --tar_pop SAS --aux_ss eur_ss.txt,eas_ss.txt,amr.txt,afr.txt --tar_ss sas_ss.txt --tar_geno training_geno --tar_pheno training_pheno --penalty 10 --out SAS_MPP_out.txt
+bash
+python MPP_master.py \
+  --version MPP-PRS+ \
+  --chr 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 \
+  --trait_type continuous \
+  --bfileTrain /data/target/train_chr \
+  --phenoTrain /data/target/train_pheno.txt \
+  --covTrain /data/target/train_cov_chr \
+  --auxPops EUR,EAS,AFR \
+  --prsAux /data/aux/EUR_prs_chr,/data/aux/EAS_prs_chr,/data/aux/AFR_prs_chr \
+  --validate True \
+  --bfileVal /data/target/val_chr \
+  --phenoVal /data/target/val_pheno.txt \
+  --covVal /data/target/val_cov_chr \
+  --L1 0.001,0.01,0.1,1,10,1000,10000 \
+  --out /data/output/mpp_results \
+  --Nthreads all \
+  --verbose False
 ```
+#### File Format Specifications
+
+The pipeline relies on several tab-separated text files. **Note:** For chromosome-specific files (genotypes, PRS, SS, Covariates), you only provide the **prefix** to the script, and the pipeline automatically appends the chromosome number and the extension (e.g., `prefix1.txt`, `prefix1.bed`).
+
+1. Summary Statistics (SS) & Polygenic Risk Score (PRS) Files
+Whether you are providing Auxiliary PRS (`--prsAux`), Auxiliary Summary Statistics (`--ssAux`), Target PRS (`--prsTar`), or Target Summary Statistics (`--ssTar`), the input `.txt` files **must** be tab-separated and contain the following column headers:
+
+| CHR | SNP | POS | A1 | A2 | BETA |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | rs12345 | 10000 | A | G | 0.052 |
+| 1 | rs67890 | 10500 | C | T | -0.014 |
+
+*Note: The pipeline filters SNPs by intersecting the `SNP` column across the target genotypes and auxiliary datasets.*
+
+2. Phenotype Files (`--phenoTrain`, `--phenoVal`)
+Must be a tab-separated file containing three columns explicitly named `FID`,`IID`,`Pheno`.
+* For **continuous** traits: Float/integer values.
+* For **binary** traits: Must be coded as `0` (controls) and `1` (cases).
+
+3. Covariate Files (`--covTrain`, `--covVal`) *(Optional)*
+Must be a tab-separated file. The script ignores the first two columns (`FID` and `IID` in PLINK formats) and reads all subsequent columns as covariates starting from index 2.
+
+#### Command-Line Arguments
+
+General & System Settings
+
+* **`--version`** `<str>` (Default: `MPP-PRS+`)
+  Specify which version of the MultiPopPred model to use. 
+  *Choices: `MPP-PRS+`, `MPP-PRS`, `MPP-PRS-TarSS`, `MPP-GWAS`, `MPP-GWAS-TarSS`, `MPP-GWAS-Admix`.*
+* **`--chr`** `<str>` (Default: `1,2,3,...,22`)
+  Comma-separated integers specifying which chromosomes to process.
+* **`--trait_type`** `<str>`
+  Specify whether the phenotype trait is `binary` or `continuous`.
+* **`--out`** `<str>` **(Required)**
+  Absolute or relative path to the output directory where results will be saved.
+* **`--Nthreads`** `<str>` (Default: `all`)
+  Number of threads to use for parallelizing across chromosomes. Acceptable inputs are an integer or `'all'`.
+* **`--seed`** `<int>` (Default: `123`)
+  Seed value to ensure reproducibility across runs.
+* **`--verbose`** `<bool>` (Default: `True`)
+  Set to `True` or `False` to enable or disable detailed console output. `False` is advised when using parallel processing to avoid clutter in outputs. 
+
+---
+
+Target Population Training Files
+
+* **`--bfileTrain`** `<str>`
+  Prefix path to the target population's training genotype data in PLINK binary format (e.g., `/path/tar_train_chr`). The script will append the chromosome number and `.bed`/`.bim`/`.fam` extensions.
+* **`--bfileExtLD`** `<str>`
+  Prefix path to the target population's external LD reference file. Required for `TarSS` model versions.
+* **`--phenoTrain`** `<str>`
+  Path to the target population's ground-truth training phenotype file.
+* **`--covTrain`** `<str>` *(Optional)*
+  Prefix path to the target population's training set covariates.
+* **`--ssTar`** `<str>`
+  Path to the target population's summary statistics file (`.txt`). Required for version `MPP-GWAS-TarSS`.
+* **`--prsTar`** `<str>`
+  Path to the target population's single ancestry PRS file (`.txt`). Required for version `MPP-PRS-TarSS`.
+
+---
+
+Auxiliary Population Files
+
+* **`--auxPops`** `<str>`
+  Comma-separated list of auxiliary population identifiers (e.g., `EUR,EAS,AMR,AFR`).
+* **`--ssAux`** `<str>`
+  Comma-separated prefix paths to the auxiliary populations' summary statistics files. Must match the order provided in `--auxPops`.
+* **`--prsAux`** `<str>`
+  Comma-separated prefix paths to the auxiliary populations' single ancestry PRS files. Must match the order provided in `--auxPops`.
+* **`--AdmixWeights`** `<str>`
+  Path to the file containing admixture proportions. Required exclusively for the `MPP-GWAS-Admix` version.
+* **`--Neff`** `<str>`
+  Comma-separated effective sample sizes for auxiliary populations, followed by the target population's effective sample size at the very end.
+
+---
+
+Validation Settings
+
+* **`--validate`** `<bool>` (Default: `True`)
+  Enable or disable the validation step to tune hyperparameters.
+* **`--bfileVal`** `<str>`
+  Prefix path to the validation target genotype data in PLINK format.
+* **`--phenoVal`** `<str>`
+  Path to the validation ground-truth phenotype file.
+* **`--covVal`** `<str>` *(Optional)*
+  Prefix path to the validation dataset covariates.
+
+---
+
+Optimization & Penalties (L-BFGS)
+
+* **`--L1`** `<str>` (Default: `0.0001,0.001,0.01,0.1,1,10,100,1000,10000`)
+  Comma-separated list of L1 penalty floats to test during validation cross-checking. If `--validate False`, you must provide a single float.
+* **`--L2`** `<str>` (Default: `0.0001,0.001,0.01,0.1,0.5,0.9,0.99`)
+  Comma-separated list of L2 penalty floats (utilized in `TarSS` versions). If `--validate False`, you must provide a single float.
+* **`--smoothing`** `<float>` (Default: `0.1`)
+  Nesterov smoothing parameter used for calculating the L1 penalty derivative.
+* **`--max_iter`** `<int>` (Default: `10000`)
+  Maximum number of iterations allowed for the L-BFGS optimizer.
+* **`--tol`** `<float>` (Default: `0.0001`)
+  Tolerance threshold for L-BFGS convergence.
+* **`--max_fun`** `<int>` (Default: `10`)
+  Maximum number of function evaluations for L-BFGS.
 
 ### Running Jupyter Notebooks
 
