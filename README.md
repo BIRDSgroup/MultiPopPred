@@ -30,7 +30,6 @@ You should have received a copy of the GNU Lesser General Public License along w
    ```
    git clone https://github.com/BIRDSgroup/MultiPopPred.git
    ```
-- The basic code for the five versions of MultiPopPred are provided as Jupyter notebooks in [Scripts](./Scripts).
 - Example data for running the scripts is made available here: [Link to example data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EtX4VV-0h1dJrXaW2kA4gWoBQxZX04sE25UcJ6V5jXccNA?e=LCRCHO).
 - Hardware Requirements
   - MultiPopPred requires only a standard computer with enough RAM and CPU-cores to support the in-memory operations. 
