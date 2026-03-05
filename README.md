@@ -176,6 +176,8 @@ Optimization & Penalties (L-BFGS)
 * **`--max_fun`** `<int>` (Default: `10`)
   Maximum number of function evaluations for L-BFGS.
 
+---
+---
 ### Running Jupyter Notebooks
 
 The basic code for all five versions of MultiPopPred has been provided as Jupyter Notebooks (.ipynb files). To run these notebooks, one must have Jupyter installed on their systems which can easily be done following the instructions [over here](https://jupyter.org/install). Once Jupyter has been installed properly, Jupyter Notebook can be initialized as follows:
