@@ -43,7 +43,8 @@ You should have received a copy of the GNU Lesser General Public License along w
      - Optional: The complete conda environment can be reproduced using [environment.yml](./environment.yml).
        ```
        conda env create -f environment.yml
-       ``` 
+       ```
+     - PLINK2[https://www.cog-genomics.org/plink/2.0/] must be downloaded and kept in the working directory.
 - Additional information such as Supplementary Data files associated with the manuscript are provided in [Supplementary Data](https://bit.ly/4nemWud) .
 
 ## Section 2: Using MultiPopPred
