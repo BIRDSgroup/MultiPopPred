@@ -78,14 +78,18 @@ python MPP_master.py \
 The pipeline relies on several tab-separated text files. **Note:** For chromosome-specific files (genotypes, PRS, SS, Covariates), you only provide the **prefix** to the script, and the pipeline automatically appends the chromosome number and the extension (e.g., `prefix1.txt`, `prefix1.bed`).
 
 1. Summary Statistics (SS) & Polygenic Risk Score (PRS) Files
-Whether you are providing Auxiliary PRS (`--prsAux`), Auxiliary Summary Statistics (`--ssAux`), Target PRS (`--prsTar`), or Target Summary Statistics (`--ssTar`), the input `.txt` files **must** be tab-separated and contain the following column headers (The BETA column should be populated with logOR values in case of binary traits):
+Whether you are providing Auxiliary PRS (`--prsAux`), Auxiliary Summary Statistics (`--ssAux`), Target PRS (`--prsTar`), or Target Summary Statistics (`--ssTar`), the input `.txt` files **must** be tab-separated and contain the following column headers:
 
 | CHR | SNP | POS | A1 | A2 | BETA |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1 | rs12345 | 10000 | A | G | 0.052 |
 | 1 | rs67890 | 10500 | C | T | -0.014 |
 
-*Note: The pipeline filters SNPs by intersecting the `SNP` column across the target genotypes and auxiliary datasets.*
+*Note 1: The pipeline filters SNPs by intersecting the `SNP` column across the target genotypes and auxiliary datasets.*
+
+*Note 2: The BETA column should be populated with logOR values in case of binary traits.*
+
+*Note 3: It is assumed that the GWAS summary statistics and PRS input files have been through allele harmonization. If not, the [allele_harmonization.R](./Scripts/allele_harmonization.R) script could be used for the same as a pre-prcessing step.*
 
 2. Phenotype Files (`--phenoTrain`, `--phenoVal`)
 Must be a tab-separated file containing three columns explicitly named `FID`,`IID`,`Pheno`.
