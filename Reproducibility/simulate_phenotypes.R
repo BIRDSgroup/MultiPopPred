@@ -2,15 +2,15 @@ library(mvtnorm)
 library(bigstatsr)
 library(genio)
 
-PATH <- "/Users/ritwizkamal/Reproducibility/Reproducibility_Level4/"
-outPATH <- "/Users/ritwizkamal/Reproducibility/Reproducibility_Level4/sample_output/"
+PATH <- "/Reproducibility_Level4/"
+outPATH <- "/Reproducibility_Level4/sample_output/"
 
 #================================================================================================
 
 #Change here to reproduce different simulation configurations
 
-#Call Saved Seed
-myseed <- read.table('/Users/ritwizkamal/Reproducibility/Simul_Analysis_1/Additional/Seeds/seed_exp1.4.1.seed')
+#Call/Enter Saved Seed
+myseed <- read.table('<PATH TO SAVED SEED>')
 myseed <- myseed$V1
 set.seed(myseed)
 print(myseed)
@@ -88,8 +88,8 @@ pheno_generation_5Pops = function(N_aux1, N_aux2, N_aux3, N_aux4, N_tar_train, N
 
 #================================================================================================
 
-aux1_train_file <- 'E0_EUR.geno'
-aux1info_file <- 'eur_info.info'
+aux1_train_file <- PATH+'E0_EUR.geno'
+aux1info_file <- PATH+'eur_info.info'
 aux1_full <- read.table(paste0(PATH,aux1_train_file), sep=" ")
 aux1_samples <- sample(1:dim(aux1_full)[2], Naux1_train, replace=FALSE, prob=NULL)
 aux1_train <- as.matrix(aux1_full[,aux1_samples])
@@ -98,8 +98,8 @@ aux1_train <- t(aux1_train)
 aux1_train <- scale(aux1_train, center = TRUE, scale = TRUE)
 rm(aux1_full)
 
-aux2_train_file <- 'E0_EAS.geno'
-aux2info_file <- 'eas_info.info'
+aux2_train_file <- PATH+'E0_EAS.geno'
+aux2info_file <- PATH+'eas_info.info'
 aux2_full <- read.table(paste0(PATH,aux2_train_file), sep=" ")
 aux2_samples <- sample(1:dim(aux2_full)[2], Naux2_train, replace=FALSE, prob=NULL)
 aux2_train <- as.matrix(aux2_full[,aux2_samples])
@@ -108,8 +108,8 @@ aux2_train <- t(aux2_train)
 aux2_train <- scale(aux2_train, center = TRUE, scale = TRUE)
 rm(aux2_full)
 
-aux3_train_file <- 'E0_AMR.geno'
-aux3info_file <- 'amr_info.info'
+aux3_train_file <- PATH+'E0_AMR.geno'
+aux3info_file <- PATH+'amr_info.info'
 aux3_full <- read.table(paste0(PATH,aux3_train_file), sep=" ")
 aux3_samples <- sample(1:dim(aux3_full)[2], Naux3_train, replace=FALSE, prob=NULL)
 aux3_train <- as.matrix(aux3_full[,aux3_samples])
@@ -118,8 +118,8 @@ aux3_train <- t(aux3_train)
 aux3_train <- scale(aux3_train, center = TRUE, scale = TRUE)
 rm(aux3_full)
 
-aux4_train_file <- 'E0_AFR.geno'
-aux4info_file <- 'afr_info.info'
+aux4_train_file <- PATH+'E0_AFR.geno'
+aux4info_file <- PATH+'afr_info.info'
 aux4_full <- read.table(paste0(PATH,aux4_train_file), sep=" ")
 aux4_samples <- sample(1:dim(aux4_full)[2], Naux4_train, replace=FALSE, prob=NULL)
 aux4_train <- as.matrix(aux4_full[,aux4_samples])
@@ -128,9 +128,9 @@ aux4_train <- t(aux4_train)
 aux4_train <- scale(aux4_train, center = TRUE, scale = TRUE)
 rm(aux4_full)
 
-sas_train_file <- 'E0_SAS.geno'
-snplist_file <- 'all_5_pops_common_snplist.snps'
-sasinfo_file <- 'sas_info.info'
+sas_train_file <- PATH+'E0_SAS.geno'
+snplist_file <- PATH+'all_5_pops_common_snplist.snps'
+sasinfo_file <- PATH+'sas_info.info'
 sas_full <- read.table(paste0(PATH,sas_train_file), sep=" ")
 sas_samples <- sample(1:dim(sas_full)[2], Ntar_train+Ntar_val+Ntar_test, replace=FALSE, prob=NULL)
 sas_train_samples <- sas_samples[1:Ntar_train]
