@@ -218,7 +218,7 @@ MPP-PRS+ requires the following inputs:
    (A detailed account of the code, input and output requirements for Lassosum-TrueLD are provided later in this section)
    ```
      CHR	SNP	        POS	        A1 A2 BETA
-     22	rs5747999	17075353.0	A  G  0.0004
+     22	rs5747999	17075353.0	A  C  0.0004
      22	rs1807512	17221495.0	C  T  -0.0009
    ```
 2. Target Population's Genotype files for training, validation and testing datasets in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format.
