@@ -30,7 +30,7 @@ You should have received a copy of the GNU Lesser General Public License along w
    ```
    git clone https://github.com/BIRDSgroup/MultiPopPred.git
    ```
-- Example data for running the scripts is made available here: [Link to example data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EtX4VV-0h1dJrXaW2kA4gWoBQxZX04sE25UcJ6V5jXccNA?e=LCRCHO).
+- Example data for running the scripts is made available here: [Link to example data](https://1drv.ms/u/c/1d2cade3bfb64a9a/IQBLR4sk1b0bQKwGStjnr6W_AZUv78COHeU_neWaNOM_cVg?e=F0WnDB).
 - Hardware Requirements
   - MultiPopPred requires only a standard computer with enough RAM and CPU-cores to support the in-memory operations. 
 - Software Requirements
@@ -61,13 +61,13 @@ python MPP_master.py \
   --trait_type continuous \
   --bfileTrain /data/target/train_chr \
   --phenoTrain /data/target/train_pheno.txt \
-  --covTrain /data/target/train_cov_chr \
+  --covTrain /data/target/train_cov.txt \
   --auxPops EUR,EAS,AFR \
   --prsAux /data/aux/EUR_prs_chr,/data/aux/EAS_prs_chr,/data/aux/AFR_prs_chr \
   --validate True \
   --bfileVal /data/target/val_chr \
   --phenoVal /data/target/val_pheno.txt \
-  --covVal /data/target/val_cov_chr \
+  --covVal /data/target/val_cov.txt \
   --L1 0.001,0.01,0.1,1,10,1000,10000 \
   --out /data/output/mpp_results \
   --Nthreads all \
@@ -78,7 +78,7 @@ python MPP_master.py \
 The pipeline relies on several tab-separated text files. **Note:** For chromosome-specific files (genotypes, PRS, SS, Covariates), you only provide the **prefix** to the script, and the pipeline automatically appends the chromosome number and the extension (e.g., `prefix1.txt`, `prefix1.bed`).
 
 1. Summary Statistics (SS) & Polygenic Risk Score (PRS) Files
-Whether you are providing Auxiliary PRS (`--prsAux`), Auxiliary Summary Statistics (`--ssAux`), Target PRS (`--prsTar`), or Target Summary Statistics (`--ssTar`), the input `.txt` files **must** be tab-separated and contain the following column headers:
+Whether you are providing Auxiliary PRS (`--prsAux`), Auxiliary Summary Statistics (`--ssAux`), Target PRS (`--prsTar`), or Target Summary Statistics (`--ssTar`), the input `.txt` files **must** be tab-separated and contain the following column headers (The BETA column should be populated with logOR values in case of binary traits):
 
 | CHR | SNP | POS | A1 | A2 | BETA |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -126,7 +126,7 @@ Target Population Training Files
 * **`--phenoTrain`** `<str>`
   Path to the target population's ground-truth training phenotype file.
 * **`--covTrain`** `<str>` *(Optional)*
-  Prefix path to the target population's training set covariates.
+  Path to the target population's training set covariates.
 * **`--ssTar`** `<str>`
   Path to the target population's summary statistics file (`.txt`). Required for version `MPP-GWAS-TarSS`.
 * **`--prsTar`** `<str>`
@@ -158,7 +158,7 @@ Validation Settings
 * **`--phenoVal`** `<str>`
   Path to the validation ground-truth phenotype file.
 * **`--covVal`** `<str>` *(Optional)*
-  Prefix path to the validation dataset covariates.
+  Path to the validation dataset covariates.
 
 ---
 
@@ -174,7 +174,7 @@ Optimization & Penalties (L-BFGS)
   Maximum number of iterations allowed for the L-BFGS optimizer.
 * **`--tol`** `<float>` (Default: `0.0001`)
   Tolerance threshold for L-BFGS convergence.
-* **`--max_fun`** `<int>` (Default: `10`)
+* **`--max_fun`** `<int>` (Default: `100000`)
   Maximum number of function evaluations for L-BFGS.
 
 ---
@@ -213,9 +213,9 @@ MPP-PRS+ requires the following inputs:
 1. Outputs (from single-ancestry PRS analysis) from Lassosum-TrueLD for each auxiliary population (and optionally the target population).
    (A detailed account of the code, input and output requirements for Lassosum-TrueLD are provided later in this section)
    ```
-     CHR	SNP	        POS	        A1	BETA
-     22	rs5747999	17075353.0	A	0.00039767037558578256
-     22	rs1807512	17221495.0	C	-0.0008640544683478455
+     CHR	SNP	        POS	        A1 A2 BETA
+     22	rs5747999	17075353.0	A  G  0.0004
+     22	rs1807512	17221495.0	C  T  -0.0009
    ```
 2. Target Population's Genotype files for training, validation and testing datasets in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format.
    
@@ -235,10 +235,9 @@ MPP-PRS+ requires the following inputs:
    
 3. Target Population's Phenotype files for training, validation and testing datasets in the following format
    ```
-   -0.570771708057521
-   -0.503465336753098
-   0.0783526847346506
-   1.08188259542337
+   FID   IID   Pheno
+   1001  1001  -0.5708
+   1002  1002  -0.5035
    ```
 4. A L1 penalty value.
 
@@ -266,13 +265,9 @@ The code for MPP-PRS is available at [MPP-PRS.ipynb](./Scripts/MPP-PRS.ipynb)
 
 MPP-PRS requires the following inputs:
 
-1. Outputs from Lassosum-ExtLD (or [Lassosum2 (Zhang et al., Nat. Comms., 2024)](https://github.com/Jingning-Zhang/PROSPER)) for each auxiliary population (and optionally the target population).
+1. Outputs from Lassosum-ExtLD (or [Lassosum2 (Zhang et al., Nat. Comms., 2024)](https://github.com/Jingning-Zhang/PROSPER)) for each auxiliary population (and optionally the target population). The expected input format for MPP-PRS is the same as MPP-PRS+.
    (A detailed account of the code, input and output requirements for Lassosum-ExtLD are provided later in this section)
-   ```
-   rsid	        a1      a0      weight
-   rs5747999	A	C	-0.011848444003009
-   rs1807512	C	T	-0.0131474125666559
-   ```
+   
 2. Target Population's Genotype files for training, validation and testing datasets in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format.
    
    2.1. The .bed file contains the binary encoded genotypes
@@ -291,12 +286,7 @@ The code for Lassosum-ExtLD (or Lassosum2) can be found at the Github repository
 
 Lassosum-ExtLD works on a single population/anestry at a time and requires the following inputs (A more detailed account of Lassosum2's code, input and output requirements can be found on [PROSPER's Github](https://github.com/Jingning-Zhang/PROSPER)):
 
-1. The population in consideration's GWAS summary statistics in the following format:
-   ```
-   rsid	        chr	a1	a0	beta	                beta_se	                n_eff
-   rs5747999	22	A	C	-0.0046297381055207	0.0308228833408787	1000
-   rs1807512	22	C	T	-0.0015843367342689	0.0308231909399726	1000
-   ```
+1. The population in consideration's GWAS summary statistics
    
 2. The population in consideration's Genotype files for training, validation and testing datasets in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format.
 
@@ -307,12 +297,7 @@ Lassosum-ExtLD works on a single population/anestry at a time and requires the f
    2.3. The .fam file contains information on samples/individuals in the same format as depicted in point 2.3 under MPP-PRS+ input requirements.
        
 3. The population in consideration's Phenotype files for training, validation and testing datasets merged into a single file in the following format:
-   ```
-   1001 1001 -0.570771708057521
-   1002 1002 -0.503465336753098
-   1003 1003 0.0783526847346506
-   1004 1004 1.08188259542337
-   ```
+   
 4. The population in consideration's external LD reference panel which can be obtained from [PROSPER's Github](https://github.com/Jingning-Zhang/PROSPER).
 
 #### MPP-GWAS
@@ -321,36 +306,18 @@ The code for MPP-GWAS can be found at [MPP-GWAS.ipynb](./Scripts/MPP-GWAS.ipynb)
 
 MPP-GWAS requires the following inputs:
 
-1. GWAS Summary Statistics for each auxiliary population (and optionally the target population) in the following format:
-   ```
-   CHR   SNP          GENETIC.DIST       POS         A1   A2   BETA                   SE                    T                    P                 N
-   22    rs5747999    0.0127800389155    17075353    A    C    -0.0046297381055207    0.0308228833408787    -0.15020457542272    0.880603216185275 1000
-   22    rs1807512    0.153130271278     17221495    C    T    -0.0015843367342689    0.0308231909399726    -0.0514008019920572  0.959006145722472 1000
-   22    rs4819535    0.154243623837     17278762    C    T    0.0316657163724304     0.0308069292177538    1.02787642833878     0.304007958825193 1000
-   ```
+1. GWAS Summary Statistics for each auxiliary population (and optionally the target population) in the same format as MPP-PRS+.
+   
 2. Target Population's Genotype files for training, validation and testing datasets in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format.
    
    2.1. The .bed file contains the binary encoded genotypes
 
-   2.2. The .bim file contains information on SNPs in the following format
-   ```
-   22 rs5747999 0 17075353 A C
-   22 rs1807512 0 17221495 C T
-   ```
+   2.2. The .bim file contains information on SNPs
 
-   2.3. The .fam file contains information on samples/individuals in the following format
-   ```
-   1001 1001 0 0 0 -9
-   1002 1002 0 0 0 -9
-   ```
+   2.3. The .fam file contains information on samples/individuals
    
-3. Target Population's Phenotype files for training, validation and testing datasets in the following format
-   ```
-   -0.570771708057521
-   -0.503465336753098
-   0.0783526847346506
-   1.08188259542337
-   ```
+3. Target Population's Phenotype files for training, validation and testing datasets
+   
 4. A L1 penalty value.
 
 #### MPP-GWAS-TarSS
@@ -359,7 +326,7 @@ The code for MPP-GWAS-TarSS can be found at [MPP-GWAS-TarSS.ipynb](./Scripts/MPP
 
 MPP-GWAS-TarSS requires the following inputs:
 
-1. GWAS Summary Statistics for each auxiliary population as well as the target population in the same format as depicted in point 1 under MPP-GWAS input requirements.
+1. GWAS Summary Statistics for each auxiliary population as well as the target population in the same format as MPP-PRS+.
   
 2. Target Population's external LD reference panel in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format. The reference panel can be obtained from an appropriate source such as [1000 Genomes](https://cncr.nl/research/magma/). The computation of LD happens during runtime of the code.
    
@@ -371,19 +338,19 @@ The code for MPP-GWAS-Admixture can be found at [MPP-GWAS-Admixture.ipynb](./Scr
 
 MPP-GWAS-Admixture requires the following inputs:
 
-1. GWAS Summary Statistics for each auxiliary population (and optionally the target population) in the same format as depicted in point 1 under MPP-GWAS input requirements.
+1. GWAS Summary Statistics for each auxiliary population (and optionally the target population) in the same format as MPP-PRS+.
    
 2. Target Population's Genotype files for training, validation and testing datasets in [PLINK's](https://www.cog-genomics.org/plink/) bed/bim/fam format.
    
    2.1. The .bed file contains the binary encoded genotypes
 
-   2.2. The .bim file contains information on SNPs in the same format as depicted in point 2.2 under MPP-GWAS input requirements.
+   2.2. The .bim file contains information on SNPs
 
-   2.3. The .fam file contains information on samples/individuals in the same format as depicted in point 2.3 under MPP-GWAS input requirements.
+   2.3. The .fam file contains information on samples/individuals
    
-3. Target Population's Phenotype files for training, validation and testing datasets in the same format as depicted in point 3 under MPP-GWAS input requirements.
+3. Target Population's Phenotype files for training, validation and testing datasets.
    
-4. The admixture proportions for individuals in the target population in the following format:
+4. The admixture proportions for individuals in the target population in the following format (minus the header):
    (The admixture proportions can be obtained with the help of the tool [Admixture](https://dalexander.github.io/admixture/))
    ```
    AUX1.PROP   AUX2.PROP   AUX3.PROP   AUX4.PROP
@@ -406,16 +373,32 @@ Here ```BETA``` represents the improved effect size estimates of SNPs present in
 
 ### Running MultiPopPred with example data
 
-To run MultiPopPred on the provided [example data](https://1drv.ms/f/c/1d2cade3bfb64a9a/EtX4VV-0h1dJrXaW2kA4gWoBQxZX04sE25UcJ6V5jXccNA?e=LCRCHO), the following steps need to be followed:
+To run MultiPopPred on the provided [example data](https://1drv.ms/u/c/1d2cade3bfb64a9a/IQBLR4sk1b0bQKwGStjnr6W_AZUv78COHeU_neWaNOM_cVg?e=lxaUxv), the following steps need to be followed:
 
-1. Download example_data.tar.gz (~50 Mb) from the link given above and decompress it using
+1. Download example_data_updated.zip (~66 Mb) from the link given above and decompress it using
    ```
-   tar -xvzf example_data.tar.gz
+   unzip example_data_updated.zip
    ```
-2. Download MultiPopPred scripts from [Scripts](./Scripts).
-3. Place the MultiPopPred script(s) within your example_data directory.
-4. Modify the PATH variables within the script(s) as per your system.
-5. Run the jupyter notebook script(s).
+2. Download MultiPopPred master scripts MPP_master.py.
+3. Run the script using the following template command (here shown for MPP-PRS+, with similar template commands provided in the Extpected Outputs directory of the example_data_updated.zip file)
+
+```
+python MPP_master.py \
+--version MPP-PRS+ \
+--chr 22 \
+--trait_type continuous \
+--bfileTrain /example_data/Genotypes/target_training_geno_chr \
+--phenoTrain /example_data/Phenotypes/pheno_tar_sas_train_truepheno.txt \
+--auxPops EUR,EAS,AMR,AFR \
+--prsAux /example_data/Lassosum_PRSfiles/lassosum_trueLD_eur_chr,/example_data/Lassosum_PRSfiles/lassosum_trueLD_eas_chr,/example_data/Lassosum_PRSfiles/lassosum_trueLD_amr_chr,/example_data/Lassosum_PRSfiles/lassosum_trueLD_afr_chr \
+--validate True \
+--bfileVal /example_data/Genotypes/target_validation_geno_chr \
+--phenoVal /example_data/Phenotypes/pheno_tar_sas_val_truepheno.txt \
+--L1 0.001,0.01,0.1,1,10,1000,10000 \
+--out /example_data/ExpectedOutputs/mpp_prs_plus \
+--Nthreads all \
+--verbose True                  
+```
 
 Typical expected runtime on a "normal" desktop computer is ~1-3 seconds for each of the five versions of MultiPopPred applied to the provided example data, for a given single hyperparameter configuration.
 
@@ -442,10 +425,12 @@ Simulated Genotype-Phenotype data generated in this work is available through th
 - Data for reproducing the main text figures from final results are available in [Figures/Data](./Figures/Data).
 - Code for reproducing the main text figures from final results are available in [Figures](./Figures).
 - The code-data mapping for each figure is as follows:
-  - Figures 2 and 3 -> Data: [SimulExp1.csv](./Figures/Data/SimulExp1.csv), [SimulExp2.csv](./Figures/Data/SimulExp2.csv), [SimulExp3.csv](./Figures/Data/SimulExp3.csv) -> Code: [Figures_2_and_3.ipynb](./Figures/Figures_2_and_3.ipynb)
-  - Figure 4 -> Data: [SemiSimulExp.csv](./Figures/Data/SemiSimulExp.csv) -> Code: [Figure_4.ipynb](./Figures/Figure_4.ipynb)
-  - Figure 5 -> Data: [CT_analysis.csv](./Figures/Data/CT_analysis.csv), [CT_analysis_std.csv](./Figures/Data/CT_analysis_std.csv) -> Code: [Figure_5.ipynb](./Figures/Figure_5.ipynb)
-  - Figures 6 and 7 -> Data: [MPP_Suppl_UKBB.csv](./Figures/Data/MPP_Suppl_UKBB.csv) -> Code: [Figures_6_and_7.ipynb](./Figures/Figures_6_and_7.ipynb)
+  - Figures 2 and 3 -> Data: [SimulExp1.csv](./Figures/Data/SimulExp1.csv), [SimulExp2.csv](./Figures/Data/SimulExp2.csv), [SimulExp3.csv](./Figures/Data/SimulExp3.csv) -> Code: [Figure_2_and_3.ipynb](./Figures/Figure_2_and_3.ipynb)
+  - Figure 4 -> Data: [SimulBinary.csv](./Figures/Data/SimulBinary.csv) -> Code: [Figure_4.ipynb](./Figures/Figure_4.ipynb)
+  - Figure 5 -> Data: [SemiSimulExp.csv](./Figures/Data/SemiSimulExp.csv) -> Code: [Figure_5.ipynb](./Figures/Figure_5.ipynb)
+  - Figure 6 -> Data: [QT_1K.csv](./Figures/Data/QT_1K.csv), [QT_2K.csv](./Figures/Data/QT_2K.csv) -> Code: [Figure_6.ipynb](./Figures/Figure_6.ipynb)
+  - Figure 7 -> Data: [BT_Log.csv](./Figures/Data/BT_Log.csv) -> Code: [Figure_7.ipynb](./Figures/Figure_7.ipynb)
+  - Figure 8 -> Data: [QT_1K.csv](./Figures/Data/QT_1K.csv), [QT_2K.csv](./Figures/Data/QT_2K.csv), [BT_Log.csv](./Figures/Data/BT_Log.csv) -> Code: [Figure_8.ipynb](./Figures/Figure_8.ipynb)
 - To reproduce each figure
   - The corresponding data and code scripts should be placed in the same directory.
   - The PATH variables to load data should be modified appropriately in the code script.
