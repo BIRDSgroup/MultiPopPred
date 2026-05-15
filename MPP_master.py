@@ -91,7 +91,7 @@ def setup_parser():
     parser.add_argument('--smoothing', type=float, default=0.1, help="Smoothing parameter.")
     parser.add_argument('--max_iter', type=int, default=10000, help="Maximum number of iterations for LBFGS.")
     parser.add_argument('--tol', type=float, default=0.0001, help="Tolerance for LBFGS.")
-    parser.add_argument('--max_fun', type=int, default=10, help="Maximum number of function evaluations for LBFGS.")
+    parser.add_argument('--max_fun', type=int, default=100000, help="Maximum number of function evaluations for LBFGS.")
     parser.add_argument('--seed', type=int, default=123, help="Seed for reproducibility.")
     parser.add_argument('--Nthreads', type=str, default='all', help="Number of threads (integer or 'all').")
     parser.add_argument('--out', type=str, required=True, help="Path to the output directory.")
@@ -122,8 +122,7 @@ def crosscheck_args(args):
     v_l2_group = ['MPP-GWAS-TarSS', 'MPP-PRS-TarSS']
 
     plink_exts = ['.bed', '.bim', '.fam']
-    cov_exts = ['.txt'] 
-
+  
     # --- Argument Validation Logic ---
     
     if args.version not in ['MPP-PRS+','MPP-PRS','MPP-PRS-TarSS','MPP-GWAS','MPP-GWAS-TarSS','MPP-GWAS-Admix']:
@@ -142,9 +141,8 @@ def crosscheck_args(args):
             sys.exit(f"Error: Missing --bfileTrain PLINK files for specified chromosomes. Could not find:\n" + "\n".join(missing_train[:3]) + "\n...etc")
 
         if args.covTrain:
-            missing_cov = check_chr_files(args.covTrain, chrs, cov_exts)
-            if missing_cov:
-                sys.exit(f"Error: Missing --covTrain files for specified chromosomes. Could not find:\n" + "\n".join(missing_cov[:3]) + "\n...etc")
+            if not os.path.isfile(args.covTrain):
+              sys.exit(f"Error: Covariate file not found: {args.covTrain}")
     else:
         if args.bfileTrain or args.phenoTrain or args.covTrain:
             sys.exit(f"Error: --bfileTrain, --phenoTrain, and --covTrain cannot be used with version {args.version}.")
@@ -190,8 +188,8 @@ def crosscheck_args(args):
         if missing_val: sys.exit(f"Error: Missing --bfileVal PLINK files.")
 
         if args.covVal:
-            missing_cov_val = check_chr_files(args.covVal, chrs, cov_exts)
-            if missing_cov_val: sys.exit(f"Error: Missing --covVal files.")
+            if not os.path.isfile(args.covVal):
+              sys.exit(f"Error: Covariate validation file not found: {args.covVal}")
     else:
         if args.bfileVal or args.phenoVal or args.covVal:
              sys.exit("Error: --bfileVal, --phenoVal, and --covVal cannot be used when --validate is False.")
@@ -327,10 +325,10 @@ def pre_process(chr_num, args):
       
       if args.version == 'MPP-GWAS-TarSS':
         """Loads target summary statistics """
-        tar_ss = pd.read_csv(args.ssTar, delimiter='\t')
+        tar_ss = pd.read_csv(args.ssTar+str(chr_num)+'.txt', delimiter='\t')
       elif args.version == 'MPP-PRS-TarSS':
         """Loads target PRS """
-        tar_prs = pd.read_csv(args.prsTar, delimiter='\t')
+        tar_prs = pd.read_csv(args.prsTar+str(chr_num)+'.txt', delimiter='\t')
     
   # ===========================================================================
   # ===========================================================================  
@@ -549,7 +547,7 @@ def doMPP(chr_num, L1_penalty, L2_penalty, args):
         temp_df = pd.concat([Y_tar_train[['Pheno']],Cov_train.iloc[:,2:]],axis=1)
         model = ols('Pheno ~ .', data=temp_df).fit()
         temp_y_hat = model.predict(temp_df)
-        Y_tar_train = np.array(Y_tar_train['Pheno'], dtype=float) - temp_y_hat
+        Y_tar_train = Y_tar_train - temp_y_hat
       
       Beta_hat_init = np.random.normal(0, 0.00000000001, len(tar_snps))
       
@@ -887,8 +885,8 @@ def doValidation(args):
             num_chrs = [int(i) for i in num_chrs]
             for chr_num in num_chrs:
               bfile_path = args.bfileVal + str(chr_num)
-              score_path = args.out + '/mpp_predbetas_chr'+ str(chr_num)+'_L1_'+str(L1_penalty)+'.txt'
-              out_path = temp_path +'/y_predbetas_chr'+ str(chr_num)+'_L1_'+str(L1_penalty)
+              score_path = args.out + '/mpp_predbetas_chr'+ str(chr_num)+'_L1_'+str(L1_penalty)+'_L2_'+str(L2_penalty)+'.txt'
+              out_path = temp_path +'/y_predbetas_chr'+ str(chr_num)+'_L1_'+str(L1_penalty)+'_L2_'+str(L2_penalty)
               os.system(f"./plink2 --bfile {bfile_path} --score {score_path} 2 4 5 header --out {out_path} --silent")
               
             if args.trait_type == 'continuous':
@@ -904,11 +902,11 @@ def doValidation(args):
               
               for i in range(len(num_chrs)):
                 if i == 0:
-                  out_path = temp_path +'/y_predbetas_chr'+ str(num_chrs[i])+'_L1_'+str(L1_penalty)+'.sscore'
+                  out_path = temp_path +'/y_predbetas_chr'+ str(num_chrs[i])+'_L1_'+str(L1_penalty)+'_L2_'+str(L2_penalty)+'.sscore'
                   Yhat_val_df = pd.read_csv(out_path, delimiter='\t')
                   Yhat_val = np.array(Yhat_val_df['SCORE1_AVG'], dtype=float) * np.array(Yhat_val_df['ALLELE_CT'], dtype=float)
                 else:
-                  out_path = temp_path +'/y_predbetas_chr'+ str(num_chrs[i])+'_L1_'+str(L1_penalty)+'.sscore'
+                  out_path = temp_path +'/y_predbetas_chr'+ str(num_chrs[i])+'_L1_'+str(L1_penalty)+'_L2_'+str(L2_penalty)+'.sscore'
                   temp = pd.read_csv(out_path, delimiter='\t')
                   temp = np.array(temp['SCORE1_AVG'], dtype=float) * np.array(temp['ALLELE_CT'], dtype=float)
                   Yhat_val += temp
@@ -1071,6 +1069,8 @@ def main():
         doValidation(args)
                               
       elif args.version in ['MPP-PRS-TarSS','MPP-GWAS-TarSS']:
+        L2_vals = args.L2.split(',')             
+        L2_vals = [float(i) for i in L2_vals]
         for L1_penalty in L1_vals:
           for L2_penalty in L2_vals:
             # Proceed with method execution logic
