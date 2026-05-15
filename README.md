@@ -380,7 +380,7 @@ To run MultiPopPred on the provided [example data](https://1drv.ms/u/c/1d2cade3b
    unzip example_data_updated.zip
    ```
 2. Download MultiPopPred master scripts MPP_master.py.
-3. Run the script using the following template command (here shown for MPP-PRS+, with similar template commands provided in the Extpected Outputs directory of the example_data_updated.zip file)
+3. Run the script using the following template command (here shown for MPP-PRS+, with similar template commands provided in the Expected Outputs directory of the example_data_updated.zip file)
 
 ```
 python MPP_master.py \
