@@ -1,0 +1,9 @@
+,,,,,
+Supplementary Figure 8,MultiPopPred versions,Correlation Ratio,,,
+,,L1 Penalization,,L2 Penalization,
+,,Mean,Standard Deviation,Mean,Standard Deviation
+,MPP-PRS+,0.7419,0.0132,0.7515,0.0128
+,MPP-PRS,0.6784,0.0432,0.5824,0.0752
+,MPP-GWAS,0.7435,0.0223,0.6976,0.0232
+,MPP-GWAS-TarSS,0.6409,0.0456,0.6380,0.0155
+,MPP-GWAS-Admix,0.7324,0.0241,0.6980,0.0230

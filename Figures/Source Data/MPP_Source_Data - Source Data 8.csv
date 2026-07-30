@@ -1,0 +1,36 @@
+,,,,,,,,,,,,
+"Supplementary Figure 7 Panel
+
+Performance Comparison: Correlation Ratio
+Phenotype Prediction",Optimizers,Correlation Ratio,,,,,,,,,,
+,,Mean,Standard Deviation,,,,,,,,,
+,L-BFGS,0.7435,0.0223,,,,,,,,,
+,Powell,0.5190,0.0405,,,,,,,,,
+,Nelder-Mead,0.0438,0.0478,,,,,,,,,
+,,,,,,,,,,,,
+"Supplementary Figure 7 Panel
+
+Performance Comparison: RMSE
+Phenotype Prediction",Optimizers,RMSE,,,,,,,,,,
+,,Mean,Standard Deviation,,,,,,,,,
+,L-BFGS,0.8888,0.0253,,,,,,,,,
+,Powell,1.0425,0.0442,,,,,,,,,
+,Nelder-Mead,0.9971,0.0138,,,,,,,,,
+,,,,,,,,,,,,
+"Supplementary Figure 7 Panel
+
+Performance Comparison: Loss Function
+Termination: #maxfev:100000",Optimizers,Loss Function Value,,,,,,,,,,
+,,Iteration 1,Iteration 2,Iteration 3,Iteration 4,Iteration 5,Iteration 6,Iteration 7,Iteration 8,Iteration 9,Iteration 10,Iteration 11
+,L-BFGS,2317.6269,1806.7475,1641.2283,1538.5703,1436.5446,1407.2272,1364.6736,1344.3738,1322.9768,1291.3391,1277.5214
+,Powell,2317.6269,1477.9384,--,--,--,--,--,--,--,--,--
+,Nelder-Mead,2317.6269,2317.6269,--,--,--,--,--,--,--,--,--
+,,,,,,,,,,,,
+"Supplementary Figure 7 Panel
+
+Performance Comparison: 
+Run Time Till Termination (#maxfev:100000)",Optimizers,Time (seconds),,,,,,,,,,
+,,Mean,Standard Deviation,,,,,,,,,
+,L-BFGS,144.8644,0.8722,,,,,,,,,
+,Powell,140.4155,2.2573,,,,,,,,,
+,Nelder-Mead,13.5590,3.5651,,,,,,,,,
