@@ -423,6 +423,11 @@ Simulated Genotype-Phenotype data generated in this work is available through th
   - Simulation Analyses 1 (Varying heritability of simulated trait): [Simulation_Analyses_1](https://1drv.ms/f/c/1d2cade3bfb64a9a/EgrjGhUBFMxItVfu53Nb4o4Bi2LMfmPbzTXzPWfNbx7mIA?e=3KMfXp)
   - Simulation Analyses 2 (Varying number of samples in auxiliary populations): [Simulation_Analyses_2](https://1drv.ms/f/c/1d2cade3bfb64a9a/El18a1CHg21InTva6DtnnxsBVC8bIgkW2Gfub8y8T0uquA?e=sBEs3u)
   - Simulation Analyses 3 (Varying number of sample in target population): [Simulation_Analyses_3](https://1drv.ms/f/c/1d2cade3bfb64a9a/Ep8cRApKdepOtlcWMXKTTdwBRAYDtkpOeGpuvCJJgV9TiA?e=2gkl5q)
+  - Simulation Analyses Binary Phenotypes: [Simulation Analysis Binary Phenotypes](https://1drv.ms/u/c/1d2cade3bfb64a9a/IQAeeDjzaCPhSb74J3Ax1DNeAQ680NrThG1RFR_mpkuG8FU?e=yqqOgE)
+
+Real-world eigen-decomposed SAS LD Matrices are available through the following links:
+  - 1000 Genomes based: [1KG_SAS_External_LD](https://1drv.ms/u/c/1d2cade3bfb64a9a/IQCSS2S6go7TSZYO5DWvV072AZu7DJ4oQQm4_OfmnqBRzag?e=h9PKZ7)
+  - UK Biobank based: [UKB_SAS_True_LD](https://1drv.ms/u/c/1d2cade3bfb64a9a/IQDLFLgTiMPtRoWHGAzQiGNjAUHnKNETke3ch9fWiWc5ycA?e=0PvgiV)
 
 ### Reproducibility - Level 1: Reproducing Figures from Final Results
 
@@ -462,7 +467,7 @@ Simulated Genotype-Phenotype data generated in this work is available through th
 ### Reproducibility - Level 4: Reproducing Input Genotype-Phenotype Data
 
 - Data for reproducing input genotype-phenotype data is available at [Reproducibility_Level4.tar.gz](https://1drv.ms/u/c/1d2cade3bfb64a9a/Ec7uZf7weg9FrDK4s9uG0PIBZ_5QjEP5SncE5Fc-zEVkgg?e=dPzMY9)
-- Script for reproducing input genotype-phenotype data is available at [simulate_phenotypes.R](./Reproducibility/simulate_phenotypes.R)
+- Script for reproducing input genotype-phenotype data is available at [simulate_phenotypes.R](./Reproducibility/simulate_phenotypes.R) and [simulate_binary_phenotype.R](./Reproducibility/simulate_binary_phenotype.R)
 - The code depicts reproducbility for a few sample datasets corresponding to some simulation configurations.
 - Instructions to extend the same to other/all simulation configurations is included within the code.
 
